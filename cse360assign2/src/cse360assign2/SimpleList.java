@@ -189,14 +189,93 @@ public class SimpleList
     
     
     /**
-     * Method used to get the value of a specific index in the array
+     * Method for adding an integer into the array at the end
+     * If the array is full a copy with increased size of 50%  will be made
+     * The values will be copied and old array will be replaced with the new
+     * Increases the count by 1.
      * 
-     * @param index An integer at the index in which you want the value
-     * @return Returns the value in the array at the provided index
+     * @param numberAdding The number you want to add to the array
      */
-    public int getValueAtIndex(int index)
+    public void append(int numberAdding)
     {
-        return list[index];
+        int newMaxElements;
+        
+        if(count == maxArrayElements)
+        {
+            // Calculate new Max by 50%
+            newMaxElements = maxArrayElements + maxArrayElements / 2;
+            
+            // Make new array with bigger size
+            int[] copyList = new int[newMaxElements];
+            
+            // Copy all values over from list
+            for(int iterator = 0; iterator < count; iterator++)
+                copyList[iterator] = list[iterator];
+            
+            // Have list point to the new list made with 50% more elements
+            list = copyList;
+            
+            // Setting new max
+            maxArrayElements = newMaxElements;
+        }
+        
+        // Adding element to the end of list
+        list[count] = numberAdding;
+        
+        count++;
+    }
+    
+    
+    /**
+     * Method used to return the first element in the list.
+     * If there are no elements in the list, then it returns -1.
+     * 
+     * @return Returns the value of the first element in array, if no elements exist
+     * the returns -1
+     */
+    public int first()
+    {
+        int returnValue;
+        
+        if(count != 0)
+            returnValue = list[0];
+        else
+            returnValue = -1;
+        
+        return returnValue;
+    }
+    
+    
+    /**
+     * Method used to return the last element in the list.
+     * If there are no elements in the list, then it returns -1.
+     * 
+     * @return Returns the value in the array at the last provided index, if no elements exist
+     * the returns -1
+     */
+    public int last()
+    {
+        int returnValue;
+        
+        if(count != 0)
+            returnValue = list[count - 1];
+        else
+            returnValue = -1;
+        
+        return returnValue;
+    }
+    
+    
+    /**
+     * Method used to return the first element in the list.
+     * If there are no elements in the list, then it returns -1.
+     * 
+     * @return Returns the value of the first element in array, if no elements exist
+     * the returns -1
+     */
+    public int size()
+    {
+        return maxArrayElements;
     }
 
 }
